@@ -31,12 +31,11 @@ end;
 
 
 
-
 {va chercher les données des scores dans le fichier de la musique et les affiche}
 procedure afficherHighscores(musique : String; var player : Joueur; var tabScores : HighScores; var nbScores : Word);
 var fichier : File of Joueur;
 	j : Word;
-	playerFichier : Joueur;
+	
 begin
 
 	nbScores := 0;
@@ -49,7 +48,7 @@ begin
 	writeln;
 	
 	
-	assign(fichier, 'scores/' + musique + '_scores.dat');   // on assigne le fichier et s'il n'existe pas on le crée (idem pour dossier)
+	assign(fichier, 'scores/' + musique + '_scores.dat');  // on assigne le fichier et s'il n'existe pas on le crée (idem pour dossier)
 	if not(DirectoryExists('scores')) then
 		CreateDir('scores');
 	if not(FileExists('scores/' + musique + '_scores.dat')) then
@@ -60,9 +59,9 @@ begin
 	
 	while not(eof(fichier)) do
 		begin
-			nbScores := nbScores + 1;  //trouve la nb de scores stockés dans le tableau
-			read(fichier, playerFichier);
-			writeln('- ', playerFichier.nom, ' : ', playerFichier.score);
+			nbScores := nbScores + 1; //trouve la nb de scores stockés dans le tableau
+			read(fichier, tabScores[nbScores]);
+			writeln('- ', tabScores[nbScores].nom, ' : ', tabScores[nbScores].score);
 			
 		end;
 	close(fichier);
@@ -79,14 +78,12 @@ end;
 
 
 
-
 {ajoute le score du joueur dans le tableau des scores ordonnés décroissants en passant par un tableau temporaire}
 procedure ajoutScoreTableau(player : Joueur; nbScores : Word; var tabScores : HighScores);
 var i, j : Word;
 	tabTempScores : HighScores;
 begin
-
-
+	
 	i := 1;
 	while (i < nbScores + 1) and (player.score < tabScores[i].score) do
 		begin
@@ -103,9 +100,9 @@ begin
 		
 	for j := 1 to nbScores + 1 do
 		tabScores[j] := tabTempScores[j];
+		
 
 end;
-
 
 
 
@@ -119,6 +116,7 @@ begin
 	
 	assign(fichier, 'scores/' + musique + '_scores.dat');
 	
+	
 	//ajoute le score dans le tableau
 	ajoutScoreTableau(player, nbScores, tabScores);
 
@@ -128,8 +126,9 @@ begin
 	if nbScores >= 5 then
 		nbScores := 4;
 		
+		
 	for j := 1 to nbScores + 1 do
-		write(fichier, tabScores[j]);    //écrit les scores dans le fichier
+		write(fichier, tabScores[j]);   //écrit les scores dans le fichier
 		
 		
 	close(fichier);
