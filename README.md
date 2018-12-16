@@ -1,5 +1,5 @@
-Guide d’utilisation
-===
+# I Got Rhythm / Guide d’utilisation
+
 
 ***
 
