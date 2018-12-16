@@ -21,7 +21,8 @@ Contrôles
 Pour jouer, il vous suffit d’appuyer sur les touches suivantes :
 
 
-<p style="text-align:center";>[C]  [V]  [B]  [N]  [?]</p>
+<p style="text-align:center";></p>
+<div style="text-align:center"> [C]  [V]  [B]  [N]  [?] </div>
 
 
 Le choix d’appuyer sur telle ou telle touche s’effectue selon la position des briques qui descendent le long 
